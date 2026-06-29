@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AIM Drachin Scraper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <div class="brand">
+        <div class="mark">AD</div>
+        <div>
+          <h1>AIM Drachin Scraper</h1>
+          <div class="subtitle">Katalog, pencarian, dan player iframe dari domain juragan.film</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <form class="toolbar" id="scrapeForm">
+      <input id="urlInput" type="text" value="{{ default_url }}" placeholder="Masukkan URL atau keyword pencarian" required>
+      <button id="submitBtn" type="submit">Buka</button>
+      <button id="homeBtn" type="button">Home</button>
+    </form>
+
+    <p class="notice">Gunakan hanya untuk konten yang boleh Anda akses. Aplikasi ini tidak mengunduh media, tidak membypass proteksi, dan tidak menjalankan JavaScript halaman target.</p>
+
+    <div id="error"></div>
+    <section class="player-shell" id="playerShell"></section>
+    <section class="episode-panel" id="episodePanel"></section>
+    <section class="catalog" id="catalog"></section>
+    <section class="summary" id="summary"></section>
+    <section class="grid" id="results"></section>
+  </main>
+
+  <script>
+    window.APP_DEFAULT_URL = {{ default_url|tojson }};
+  </script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
