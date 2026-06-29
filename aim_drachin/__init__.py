@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import socket
 from urllib.error import HTTPError, URLError
 
@@ -30,8 +31,10 @@ def create_app() -> Flask:
         try:
             return jsonify({"ok": True, "data": scrape(target)})
         except (ValueError, HTTPError, URLError, socket.timeout, TimeoutError) as exc:
+            app.logger.warning("Scrape gagal [%s]: %s", target, exc)
             return jsonify({"ok": False, "error": str(exc)}), 400
         except Exception as exc:
+            app.logger.exception("Scrape error tidak terduga [%s]", target)
             return jsonify({"ok": False, "error": f"Kesalahan internal: {exc}"}), 500
 
     return app
